@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>黎思思的个人主页</title>
+    <link rel="stylesheet" href="lss.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'ZenMaruGothic-Black'; /* 自定义字体名称 */
+            src: url('resource/ZenMaruGothic-Black.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Arial", sans-serif;
+            background-color: #ffdde6; /* 更改为浅灰色背景 */
+        }
+        
+        /* 启示页面样式 */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: url("images/第一页.png");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .splash-screen.fade-out {
+            opacity: 0;
+            transform: translateY(-50px);
+            pointer-events: none;
+        }
+        
+        .splash-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            overflow: hidden;
+            animation: floatIn 1s ease-out;
+        }
+        
+        .splash-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .splash-name {
+            font-family: 'ZenMaruGothic-Black', cursive;
+            font-size: 3em;
+            letter-spacing: 3px;
+            color: rgb(48, 20, 20);
+            margin-bottom: 10px;
+            /* text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); */
+            animation: slideIn 1s ease-out 0.3s both;
+        }
+        
+        
+        .splash-welcome {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            text-align: center;
+            animation: slideIn 1s ease-out 0.9s both;
+        }
+        
+        .splash-enter-btn {
+        position: relative;
+        padding: 15px 40px;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        animation: slideIn 1s ease-out 1.2s both;
+        overflow: hidden; /* 防止背景图溢出 */
+        z-index: 0;
+    }
+
+    .splash-enter-btn::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: url("images/按钮.jpg");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.8; /* 背景图透明度 */
+        border-radius: 50px;
+        z-index: -1;
+    }
+        
+        .splash-enter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.3);
+            background-image: url("images/按钮.jpg");
+        }
+        
+        @keyframes floatIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 主页面样式 */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
+        }
+        
+        .main-content.show {
+            opacity: 1;
+        }
+        
+        p {
+            color: #333;
+        }
+        .title {
+            text-align: center;
+            padding-top: 20%;
+            padding-bottom: 20%;
+            font-family: 'ZenMaruGothic-Black', cursive;
+            font-size: 6em;
+            letter-spacing: 2px;
+        }
+        .uuu {
+            height: 500px;
+            background-image: url("images/loopybackground.png");
+            background-size: cover;              /* 填满整个区域（会裁剪） */
+            background-position: center;         /* 居中显示图片 */
+            background-repeat: no-repeat;        /* 防止平铺 */
+        }
+        .navbar {
+            background-color: #ffc5ce;
+            text-align: left;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: rgb(255, 149, 167);
+        }
+        .navbar a.active {
+            background-color: rgb(255, 166, 166);
+        }
+        .content {
+            padding: 20px;
+            min-height: 200px;
+            color: #333;
+        }
+
+
+
+        /* 首页布局样式 */
+        .home-layout {
+            display: flex;
+            gap: 20px;
+            /* max-width: 1200px; */
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .sidebar {
+            width: 180px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 让所有子元素水平居中 */
+            /* justify-content: center; 让内容在垂直方向也居中 */
+            margin: 0%;
+            /* 左侧个人信息栏背景 */
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ffdfe6;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+            margin-bottom: 15px;
+            border: 3px solid white;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            text-align: left; /* 文字本身左对齐 */
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #2c3e50;
+            width: auto; /* 自动宽度，让容器根据内容调整 */
+        }
+
+        .profile-details p {
+            margin: 8px 0;
+            font-weight: 500;
+        }
+
+        .main-area {
+            flex: 1;
+            min-width: 0;
+            /* 右侧主要内容区背景 */
+            background-color: #fff5f5;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #fce4ec;
+        }
+
+
+        /* 修改后的轮播容器样式 */
+        .carousel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-image {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .carousel-image.active {
+            display: block;
+        }
+
+        /* 修改后的轮播按钮样式 */
+        .carousel-button {
+            background-image: url("images/按钮1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: none;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .project-carousel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .project-carousel {
+            position: relative;
+            width: 600px; /* 固定宽度 */
+            height: auto; /* 高度自动适应 */
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-carousel-image {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            background-color: #f8f9fa;
+        }
+
+        .project-carousel-image.active {
+            display: block;
+        }
+
+
+        .project-carousel-button {
+            background-image: url("images/按钮1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: none;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-carousel-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 项目轮播指示器 */
+        .project-carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .project-carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .project-carousel-indicator.active {
+            background: white;
+        }
+
+        .scrolling-gallery {
+            overflow: hidden;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 10px 0;
+        }
+
+        .scrolling-track {
+            display: flex;
+            width: max-content;
+            animation: scroll-left 30s linear infinite;
+        }
+
+        .scrolling-track img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 10px;
+            border-radius: 8px;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .home-layout {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .title {
+                font-size: 2.5em;
+                padding-top: 10%;
+                padding-bottom: 10%;
+            }
+
+            .project-carousel {
+                height: 300px;
+            }
+
+            .carousel-container,
+            .project-carousel-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .carousel-button,
+            .project-carousel-button {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel {
+                height: 250px;
+            }
+            
+            .title {
+                font-size: 2em;
+            }
+            
+            .scrolling-track img {
+                width: 150px;
+                height: 100px;
+            }
+
+            .project-carousel {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 启示页面 -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-avatar">
+            <img src="images/头像.jpg" alt="头像">
+        </div>
+        <h1 class="splash-name">黎思思</h1>
+        <p class="splash-welcome">"..Loopy是世界上最可爱的小海狸.."</p>
+        <button class="splash-enter-btn" onclick="enterMainSite()">进入主页</button>
+    </div>
+
+    <!-- 主页面内容 -->
+    <div class="main-content" id="mainContent">
+        <div class="uuu">
+            <img src="" alt="">
+        </div>
+
+        <div class="navbar">
+            <a href="#" onclick="showContent('home')">首页</a>
+            <a href="#" onclick="showContent('portfolio')">作品集</a>
+            <a href="#" onclick="showContent('contact')">联系我</a>
+
+        </div>
+
+        <div id="content">
+
+        </div>
+    </div>
+
+    <script>
+        // 进入主页面的函数
+        function enterMainSite() {
+            const splash = document.getElementById('splashScreen');
+            const main = document.getElementById('mainContent');
+            
+            splash.classList.add('fade-out');
+            
+            setTimeout(() => {
+                splash.style.display = 'none';
+                main.classList.add('show');
+                // 加载默认内容
+                showContent('home');
+            }, 800);
+        }
+
+        const contents = {
+            home: `
+<div class="home-layout">
+  <!-- 左侧个人信息栏 -->
+  <div class="sidebar">
+    <div class="profile-avatar">
+      <img src="images/1.jpg" alt="照片">
+    </div>
+    
+    <div class="profile-details">
+      <p><strong>姓名：</strong>黎思思</p>
+      <p><strong>生日：</strong>2004年7月4日</p>
+      <p><strong>MBTI：</strong>ISFJ</p>
+      <p><strong>简介：</strong>用真心就一定可以。</p>
+    </div>
+  </div>
+
+  <!-- 右侧主要内容区 -->
+  <div class="main-area">
+    <div style="max-width: 700px; margin: 0 auto;">
+
+    <div style="width: 100%; margin-top: 80px;">
+      <p style="text-align: center;"><strong>"喜欢出去旅游，喜欢在一个新的地方慢慢生活。"</p>
+      <div class="carousel-container">
+        <button onclick="prevImage()" class="carousel-button">←</button>
+        <div class="carousel">
+          <img class="carousel-image active" src="images/2.jpg" alt="图1">
+          <img class="carousel-image" src="images/3.jpg" alt="图2">
+          <img class="carousel-image" src="images/4.jpg" alt="图3">
+          <img class="carousel-image" src="images/5.jpg" alt="图4">
+        </div>
+        <button onclick="nextImage()" class="carousel-button">→</button>
+      </div>
+    </div>
+
+    <!-- 人像摄影 -->
+    <div style="width: 100%; margin-top: 100px;">
+      <p style="text-align:center;"><strong>"喜欢拍照，喜欢被拍，喜欢所有定格的瞬间。"</p>
+      <div class="scrolling-gallery">
+        <div class="scrolling-track">
+          <img src="images/p1.jpg" alt="图1">
+          <img src="images/p2.jpg" alt="图2">
+          <img src="images/p3.jpg" alt="图3">
+          <img src="images/p4.jpg" alt="图4">
+          <img src="images/p1.jpg" alt="图1">
+          <img src="images/p2.jpg" alt="图2">
+          <img src="images/p3.jpg" alt="图3">
+          <img src="images/p4.jpg" alt="图4">
+        </div>
+      </div>
+    </div>
+
+    <div style="width: 100%; margin-top: 80px;">
+      <p style="text-align:center;"><strong>"喜欢社交，朋友是我自己挑选的家人。"</p>
+      <div class="scrolling-gallery">
+        <div class="scrolling-track">
+          <img src="images/f1.jpg" alt="图1">
+          <img src="images/f2.jpg" alt="图2">
+          <img src="images/f3.jpg" alt="图3">
+          <img src="images/f4.jpg" alt="图4">
+          <img src="images/f1.jpg" alt="图1">
+          <img src="images/f2.jpg" alt="图2">
+          <img src="images/f3.jpg" alt="图3">
+          <img src="images/f4.jpg" alt="图4">
+        </div>
+      </div>
+      </div>
+    </div>
+
+    
+  </div>
+</div>
+`,
+            portfolio: `
+                <div style="display: flex;">
+                    <ul id="project-list" style="width: 200px;padding: 10px;list-style: none;margin: 0;background-color: #f3d1e0;border-radius: 10px;box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
+                        <li><a href="#" onclick="showProject('proj1'); return false;">PawsitiveEcho</a></li>
+                        <li><a href="#" onclick="showProject('proj2'); return false;">情绪魔法书</a></li>
+                        <li><a href="#" onclick="showProject('proj3'); return false;">出行伴宠</a></li>
+                    </ul>
+                    <div id="project-content" style="flex: 1; padding: 10px;"></div>
+                </div>
+            `,
+            contact:`
+                <div style="text-align: center; padding: 20px;">
+                    <h2>联系我</h2>
+                    <p>如果你有任何问题或建议，欢迎通过以下方式联系我：</p>
+                    <p><strong>Email:3220101019@zju.edu.cn</strong>`,
+        };
+
+
+        // 项目轮播相关变量
+        let projectCurrentIndex = 0;
+
+        function showContent(section) {
+            document.getElementById('content').innerHTML = contents[section];
+
+            // 如果是作品集，默认展示第一个项目
+            if (section === 'portfolio') {
+                showProject('proj1');
+            }
+        }
+
+        function showProject(projectId) {
+            const projectContent = {
+                proj1: `<h2 style="">项目名称：PawsitiveEcho</h2>
+                <p style="text-align: center;">"来自另一个星球的信息，是思念的声音。"</p>
+                <div class="project-carousel-container">
+                    <button onclick="prevProjectImage()" class="project-carousel-button">←</button>
+                    <div class="project-carousel">
+                        <img class="project-carousel-image active" src="images/1.png" alt="项目图片1">
+                        <img class="project-carousel-image" src="images/2.png" alt="项目图片2">
+                        <img class="project-carousel-image" src="images/3.png" alt="项目图片3">
+                        <img class="project-carousel-image" src="images/4.png" alt="项目图片4">
+                        <img class="project-carousel-image" src="images/5.png" alt="项目图片5">
+                        
+                        <div class="project-carousel-indicators">
+                            <span class="project-carousel-indicator active" onclick="showProjectImage(0)"></span>
+                            <span class="project-carousel-indicator" onclick="showProjectImage(1)"></span>
+                            <span class="project-carousel-indicator" onclick="showProjectImage(2)"></span>
+                            <span class="project-carousel-indicator" onclick="showProjectImage(3)"></span>
+                            <span class="project-carousel-indicator" onclick="showProjectImage(4)"></span>
+                        </div>
+                    </div>
+                    <button onclick="nextProjectImage()" class="project-carousel-button">→</button>
+                </div>
+                `,
+                proj2: `<h2 style="">项目名称：情绪魔法书</h2>
+                <p style="text-align: center;">“让孩子做情绪的第一责任人。”</p>
+                <div class="project-carousel-container">
+                    <button onclick="prevProjectImage()" class="project-carousel-button">←</button>
+                    <div class="project-carousel">
+                        <img class="project-carousel-image active" src="images/2.1.png" alt="项目图片1">
+                        <img class="project-carousel-image" src="images/2.2.png" alt="项目图片2">
+                        <img class="project-carousel-image" src="images/2.3.png" alt="项目图片3">
+                        <img class="project-carousel-image" src="images/2.4.png" alt="项目图片4">
+                        <img class="project-carousel-image" src="images/2.5.png" alt="项目图片5">
+                        
+                        <div class="project-carousel-indicators">
+                            <span class="project-carousel-indicator active" onclick="showProjectImage(0)"></span>
+                            <span class="project-carousel-indicator" onclick="showProjectImage(1)"></span>
+                            <span class="project-carousel-indicator" onclick="showProjectImage(2)"></span>
+                            <span class="project-carousel-indicator" onclick="showProjectImage(3)"></span>
+                            <span class="project-carousel-indicator" onclick="showProjectImage(4)"></span>
+                        </div>
+                    </div>
+                    <button onclick="nextProjectImage()" class="project-carousel-button">→</button>
+                </div>
+                `,
+            };
+
+            const container = document.getElementById('project-content');
+            if (container) {
+                container.innerHTML = projectContent[projectId];
+                // 重置项目轮播索引
+                projectCurrentIndex = 0;
+            }
+        }
+
+        // 首页轮播图功能
+        let currentIndex = 0;
+
+        function showImage(index) {
+            const images = document.getElementsByClassName('carousel-image');
+            for (let i = 0; i < images.length; i++) {
+                images[i].classList.remove('active');
+            }
+            images[index].classList.add('active');
+        }
+
+        function prevImage() {
+            const images = document.getElementsByClassName('carousel-image');
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        }
+
+        function nextImage() {
+            const images = document.getElementsByClassName('carousel-image');
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        }
+
+        // 项目轮播图功能
+        function showProjectImage(index) {
+            const images = document.getElementsByClassName('project-carousel-image');
+            const indicators = document.getElementsByClassName('project-carousel-indicator');
+            
+            // 移除所有活动状态
+            for (let i = 0; i < images.length; i++) {
+                images[i].classList.remove('active');
+                indicators[i].classList.remove('active');
+            }
+            
+            // 设置当前活动状态
+            images[index].classList.add('active');
+            indicators[index].classList.add('active');
+            
+            projectCurrentIndex = index;
+        }
+
+        function prevProjectImage() {
+            const images = document.getElementsByClassName('project-carousel-image');
+            projectCurrentIndex = (projectCurrentIndex - 1 + images.length) % images.length;
+            showProjectImage(projectCurrentIndex);
+        }
+
+        function nextProjectImage() {
+            const images = document.getElementsByClassName('project-carousel-image');
+            projectCurrentIndex = (projectCurrentIndex + 1) % images.length;
+            showProjectImage(projectCurrentIndex);
+        }
+
+        // 简单糖果下落动画（带倾斜旋转）
+        const snowContainer = document.createElement("div");
+        snowContainer.style.position = "fixed";
+        snowContainer.style.top = 0;
+        snowContainer.style.left = 0;
+        snowContainer.style.width = "100%";
+        snowContainer.style.height = "100%";
+        snowContainer.style.pointerEvents = "none";
+        snowContainer.style.zIndex = 9999;
+        document.body.appendChild(snowContainer);
+
+        const candies = ["🍬", "🍭", "🍫", "🍡"];
+
+        function createCandy() {
+            const candy = document.createElement("div");
+            candy.textContent = candies[Math.floor(Math.random() * candies.length)];
+            candy.style.position = "absolute";
+            candy.style.userSelect = "none";
+            candy.style.fontSize = Math.random() * 15 + 20 + "px";
+            candy.style.left = Math.random() * window.innerWidth + "px";
+            candy.style.top = "-30px";
+            candy.style.opacity = Math.random();
+            snowContainer.appendChild(candy);
+
+            const fallDuration = Math.random() * 5 + 5; // 5~10 秒
+            const horizontalDrift = Math.random() * 100 - 50;
+            const rotateStart = Math.random() * 360;
+            const rotateEnd = rotateStart + (Math.random() * 360 - 180); // ±180度内的旋转变化
+
+            candy.animate([
+                { transform: `translate(0, 0) rotate(${rotateStart}deg)` },
+                { transform: `translate(${horizontalDrift}px, ${window.innerHeight + 30}px) rotate(${rotateEnd}deg)` }
+            ], {
+                duration: fallDuration * 1000,
+                iterations: 1,
+                easing: "linear"
+            }).onfinish = () => {
+                candy.remove();
+            };
+        }
+
+        setInterval(createCandy, 700);
+    </script>
+
+</body>
+</html>
