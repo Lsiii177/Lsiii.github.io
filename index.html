@@ -166,29 +166,38 @@
             background-position: center;         /* 居中显示图片 */
             background-repeat: no-repeat;        /* 防止平铺 */
         }
-        .navbar {
-            background-color: #ffc5ce;
-            text-align: left;
-            overflow: hidden;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .navbar a {
-            display: inline-block;
-            color: white;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .navbar a:hover {
-            background-color: rgb(255, 149, 167);
-        }
-        .navbar a.active {
-            background-color: rgb(255, 166, 166);
-        }
+.navbar {
+    background-color: #ffc5ce;
+    text-align: left;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex; /* 强制按钮靠在一起 */
+}
+
+.navbar a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin: 0; /* ✅ 去除按钮之间的间距 */
+    border-radius: 0; /* ✅ 防止圆角让它们视觉上断开 */
+}
+
+.navbar a:hover {
+    background-color: rgb(255, 149, 167);
+}
+
+.navbar a.active {
+    background-color: #ff6c9d; 
+    color: white;
+}
+
         .content {
             padding: 20px;
             min-height: 200px;
@@ -266,6 +275,205 @@
             border: 1px solid #fce4ec;
         }
 
+        /* 作品集布局样式 */
+        .portfolio-layout {
+            display: flex;
+            gap: 20px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .portfolio-sidebar {
+            width: 200px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ffdfe6;
+        }
+
+        .portfolio-sidebar h3 {
+            text-align: center;
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .portfolio-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .portfolio-nav li {
+            margin-bottom: 10px;
+        }
+
+        .portfolio-nav a {
+            display: block;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #2c3e50;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .portfolio-nav a:hover {
+            background-color: #ffb3c1;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .portfolio-nav a.active {
+            background-color: #ff8fa3;
+            color: white;
+        }
+
+        .portfolio-content {
+            flex: 1;
+            min-width: 0;
+            background-color: #fff5f5;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #fce4ec;
+        }
+
+        /* 联系我布局样式 */
+        .contact-layout {
+            display: flex;
+            gap: 20px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .contact-sidebar {
+            width: 200px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ffdfe6;
+        }
+
+        .contact-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+            margin-bottom: 15px;
+            border: 3px solid white;
+        }
+
+        .contact-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .contact-info {
+            text-align: left;
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        .contact-info h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            text-align: center; /* 修复居中问题 */
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+            font-weight: 500;
+        }
+
+        .contact-content {
+            flex: 1;
+            min-width: 0;
+            background-color: #fff5f5;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #fce4ec;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-method {
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-method h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-method p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 10px;
+            background-color: #ffb3c1;
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .social-link:hover {
+            background-color: #ff8fa3;
+            transform: scale(1.1);
+        }
+
 
         /* 修改后的轮播容器样式 */
         .carousel-container {
@@ -338,8 +546,9 @@
 
         .project-carousel {
             position: relative;
-            width: 600px; /* 固定宽度 */
-            height: auto; /* 高度自动适应 */
+            width: 60%; /* 改为占据右侧布局的60% */
+            max-width: none; /* 移除最大宽度限制 */
+            height: 500px; /* 增加高度 */
             overflow: hidden;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -441,12 +650,12 @@
 
         /* 响应式设计 */
         @media (max-width: 768px) {
-            .home-layout {
+            .home-layout, .portfolio-layout, .contact-layout {
                 flex-direction: column;
                 padding: 10px;
             }
             
-            .sidebar {
+            .sidebar, .portfolio-sidebar, .contact-sidebar {
                 width: 100%;
                 position: static;
                 margin-bottom: 20px;
@@ -460,6 +669,7 @@
 
             .project-carousel {
                 height: 300px;
+                width: 90%;
             }
 
             .carousel-container,
@@ -473,6 +683,10 @@
                 width: 40px;
                 height: 40px;
                 font-size: 16px;
+            }
+
+            .contact-methods {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -492,6 +706,7 @@
 
             .project-carousel {
                 height: 250px;
+                width: 95%;
             }
         }
     </style>
@@ -503,7 +718,7 @@
             <img src="images/头像.jpg" alt="头像">
         </div>
         <h1 class="splash-name">黎思思</h1>
-        <p class="splash-welcome">"..Loopy是世界上最可爱的小海狸.."</p>
+        <p class="splash-welcome"><strong>"Loopy是世界上最可爱最真诚的小海狸!"</strong></p>
         <button class="splash-enter-btn" onclick="enterMainSite()">进入主页</button>
     </div>
 
@@ -514,10 +729,9 @@
         </div>
 
         <div class="navbar">
-            <a href="#" onclick="showContent('home')">首页</a>
-            <a href="#" onclick="showContent('portfolio')">作品集</a>
-            <a href="#" onclick="showContent('contact')">联系我</a>
-
+            <a href="#" onclick="showContent('home'); setActiveNavBar(this);" class="active" id="nav-home">首页</a>
+            <a href="#" onclick="showContent('portfolio'); setActiveNavBar(this);" id="nav-portfolio">作品集</a>
+            <a href="#" onclick="showContent('contact'); setActiveNavBar(this);" id="nav-contact">联系我</a>
         </div>
 
         <div id="content">
@@ -539,6 +753,16 @@
                 // 加载默认内容
                 showContent('home');
             }, 800);
+        }
+
+        // 设置导航栏活动状态
+        function setActiveNavBar(clickedElement) {
+            // 移除所有导航链接的活动状态
+            document.querySelectorAll('.navbar a').forEach(link => {
+                link.classList.remove('active');
+            });
+            // 添加到当前点击的元素
+            clickedElement.classList.add('active');
         }
 
         const contents = {
@@ -577,7 +801,7 @@
     </div>
 
     <!-- 人像摄影 -->
-    <div style="width: 100%; margin-top: 100px;">
+    <div style="width: 100%; margin-top: 130px;">
       <p style="text-align:center;"><strong>"喜欢拍照，喜欢被拍，喜欢所有定格的瞬间。"</p>
       <div class="scrolling-gallery">
         <div class="scrolling-track">
@@ -593,8 +817,9 @@
       </div>
     </div>
 
-    <div style="width: 100%; margin-top: 80px;">
-      <p style="text-align:center;"><strong>"喜欢社交，朋友是我自己挑选的家人。"</p>
+
+    <div style="width: 100%; margin-top: 130px;">
+      <p style="text-align:center;"><strong>"喜欢她们，朋友是我自己挑选的家人。"</p>
       <div class="scrolling-gallery">
         <div class="scrolling-track">
           <img src="images/f1.jpg" alt="图1">
@@ -610,30 +835,99 @@
       </div>
     </div>
 
+    <div style="width: 100%; margin-top: 130px;">
+      <p style="text-align:center;"><strong>"喜欢音乐，喜欢黄诗扶，喜欢陈婧霏，喜欢许嵩。"</p>
+    </div>
+
+    <div style="width: 100%; margin-top: 130px;">
+        <p style="text-align:center;"><strong>"喜欢一些有痕迹的。"</p>
+    </div>
+
+
+    <div style="width: 100%; margin-top: 130px;">
+      <p style="text-align:center;"><strong>"允许一切发生。"</p>
+    </div>
     
   </div>
 </div>
 `,
             portfolio: `
-                <div style="display: flex;">
-                    <ul id="project-list" style="width: 200px;padding: 10px;list-style: none;margin: 0;background-color: #f3d1e0;border-radius: 10px;box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
-                        <li><a href="#" onclick="showProject('proj1'); return false;">PawsitiveEcho</a></li>
-                        <li><a href="#" onclick="showProject('proj2'); return false;">情绪魔法书</a></li>
-                        <li><a href="#" onclick="showProject('proj3'); return false;">出行伴宠</a></li>
-                    </ul>
-                    <div id="project-content" style="flex: 1; padding: 10px;"></div>
-                </div>
+<div class="portfolio-layout">
+  <!-- 左侧作品集导航栏 -->
+  <div class="portfolio-sidebar">
+    <h3>我的作品</h3>
+    <ul class="portfolio-nav">
+      <li><a href="#" onclick="showProject('proj1'); setActiveNav(this); return false;" class="active">PawsitiveEcho</a></li>
+      <li><a href="#" onclick="showProject('proj2'); setActiveNav(this); return false;">情绪魔法书</a></li>
+    </ul>
+  </div>
+  
+  <!-- 右侧作品内容区 -->
+  <div class="portfolio-content" id="project-content">
+    <!-- 项目内容将在这里动态加载 -->
+  </div>
+</div>
             `,
-            contact:`
-                <div style="text-align: center; padding: 20px;">
-                    <h2>联系我</h2>
-                    <p>如果你有任何问题或建议，欢迎通过以下方式联系我：</p>
-                    <p><strong>Email:3220101019@zju.edu.cn</strong>`,
+            contact: `
+<div class="contact-layout">
+  <!-- 左侧联系信息栏 -->
+  <div class="contact-sidebar">
+    <div class="contact-avatar">
+      <img src="images/1.jpg" alt="联系我">
+    </div>
+    
+    <div class="contact-info">
+      <h3>黎思思</h3>
+      <p>🎂 2004年7月4日</p>
+      <p>🌟 ISFJ</p>
+      <p>💭 用真心就一定可以</p>
+    </div>
+    
+  </div>
+
+  <!-- 右侧联系内容区 -->
+  <div class="contact-content">
+    <h2 style="text-align: center; color: #2c3e50; margin-bottom: 10px;">联系我</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 30px;">Loopy也很喜欢交朋友！</p>
+    
+    <div class="contact-methods">
+      <div class="contact-method">
+        <h4>📧 电子邮件</h4>
+        <p><strong>学校邮箱：</strong>3220101019@zju.edu.cn</p>
+        <p><strong>个人邮箱：</strong>3254335990@qq.com</p>
+      </div>
+      
+      <div class="contact-method">
+        <h4>📱 即时通讯</h4>
+        <p><strong>微信：</strong>kiyomiJuly</p>
+        <p><strong>QQ：</strong>3254335990</p>
+      </div>
+    </div>
+    
+    <div style="background-color: rgba(255, 255, 255, 0.6); padding: 20px; border-radius: 12px; margin-top: 30px; text-align: center;">
+      <h3 style="color: #2c3e50; margin-bottom: 15px;">💌 留言板</h3>
+      <p style="color: #666; margin-bottom: 20px;">有什么想对我说的吗？</p>
+      <textarea style="width: 100%; height: 80px; padding: 10px; border: 1px solid #ffc5ce; border-radius: 8px; resize: vertical; font-family: inherit;" placeholder="在这里留下你的想法..."></textarea>
+      <button style="background-color: #ffb3c1; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin-top: 10px; cursor: pointer; transition: background-color 0.3s;" onclick="this.innerHTML='谢谢你的留言 💕'; this.style.backgroundColor='#ff8fa3';">发送留言</button>
+    </div>
+  </div>
+</div>
+            `,
         };
 
 
         // 项目轮播相关变量
         let projectCurrentIndex = 0;
+
+        // 设置导航栏活动状态
+        function setActiveNav(clickedElement) {
+            // 移除所有活动状态
+            document.querySelectorAll('.portfolio-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            // 添加到当前点击的元素
+            clickedElement.classList.add('active');
+        }
 
         function showContent(section) {
             document.getElementById('content').innerHTML = contents[section];
@@ -646,8 +940,8 @@
 
         function showProject(projectId) {
             const projectContent = {
-                proj1: `<h2 style="">项目名称：PawsitiveEcho</h2>
-                <p style="text-align: center;">"来自另一个星球的信息，是思念的声音。"</p>
+                proj1: `<h2 style="text-align: center; color: #2c3e50; margin-bottom: 10px;">PawsitiveEcho</h2>
+                <p style="text-align: center; color: #666; font-style: italic; margin-bottom: 30px;">"来自另一个星球的信息，是思念的声音。"</p>
                 <div class="project-carousel-container">
                     <button onclick="prevProjectImage()" class="project-carousel-button">←</button>
                     <div class="project-carousel">
@@ -667,9 +961,13 @@
                     </div>
                     <button onclick="nextProjectImage()" class="project-carousel-button">→</button>
                 </div>
+                <div style="margin-top: 20px; padding: 20px; background-color: rgba(255, 255, 255, 0.6); border-radius: 12px;max-width: 900px; margin: 0 auto;">
+                    <h3 style="color: #2c3e50;">项目介绍</h3>
+                    <p>宠物的离世给不少人带来了巨大的打击。人们常说，去世的亲人将去往另一个世界，宠物也会在去世后前往另一个星球。PawsitiveEcho作为地球和另一个星球连接的桥梁，让主人能够接收到异地的宠物讯息，模拟宠物的日常，一点点抚平主人对于宠物离世的伤痛。</p>
+                </div>
                 `,
-                proj2: `<h2 style="">项目名称：情绪魔法书</h2>
-                <p style="text-align: center;">“让孩子做情绪的第一责任人。”</p>
+                proj2: `<h2 style="text-align: center; color: #2c3e50; margin-bottom: 10px;">情绪魔法书</h2>
+                <p style="text-align: center; color: #666; font-style: italic; margin-bottom: 30px;">"让孩子做情绪的第一责任人。"</p>
                 <div class="project-carousel-container">
                     <button onclick="prevProjectImage()" class="project-carousel-button">←</button>
                     <div class="project-carousel">
@@ -688,6 +986,10 @@
                         </div>
                     </div>
                     <button onclick="nextProjectImage()" class="project-carousel-button">→</button>
+                </div>
+                                <div style="margin-top: 20px; padding: 20px; background-color: rgba(255, 255, 255, 0.6); border-radius: 12px;max-width: 900px; margin: 0 auto;">
+                    <h3 style="color: #2c3e50;">项目介绍</h3>
+                    <p>这是一个帮助儿童学习如何认识情绪，调节情绪的故事书，通过造景和音效打造沉浸式儿童的互动乐园。</p>
                 </div>
                 `,
             };
@@ -764,7 +1066,7 @@
         snowContainer.style.zIndex = 9999;
         document.body.appendChild(snowContainer);
 
-        const candies = ["🍬", "🍭", "🍫", "🍡"];
+        const candies = ["🍬", "🍭", "🍫", "🍡","🧁","🍰","🎂","🍪","🍩","🧇"];
 
         function createCandy() {
             const candy = document.createElement("div");
